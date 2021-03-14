@@ -37,6 +37,11 @@ class PlaneteAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View itemView = convertView;
+
+        // Data contient les noms et tailles des planetes
+        Data data = new Data();
+
+
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) mainActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             itemView = inflater.inflate(R.layout.listitem, null);
@@ -51,7 +56,7 @@ class PlaneteAdapter extends BaseAdapter {
         nomPlanete.setText(mainActivity.planetes.get(position));
 
         //  installer l'adaptateur pour la liste déroulante (spinner)
-        String[] taillePlanetes = {"4900", "12000", "12800", "6800", "144000", "120000", "52000", "50000", "2300"};
+        String[] taillePlanetes = data.getTaillePlanetes();
         final ArrayAdapter<String> spinadapter = new ArrayAdapter<String>(mainActivity, android.R.layout.simple_spinner_item, taillePlanetes);
         spinadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinadapter);

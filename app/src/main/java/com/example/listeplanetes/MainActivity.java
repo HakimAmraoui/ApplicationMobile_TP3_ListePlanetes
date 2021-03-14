@@ -10,6 +10,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     protected ArrayList<String> planetes;
+    Data data = new Data();
+
 
     ListView listview;
     PlaneteAdapter adapter;
@@ -17,14 +19,10 @@ public class MainActivity extends AppCompatActivity {
     // Initialise la liste
     private void installePlanetes() {
         planetes = new ArrayList<String>();
-        planetes.add("Mercure");
-        planetes.add("Venus");
-        planetes.add("Terre");
-        planetes.add("Mars");
-        planetes.add("Jupiter");
-        planetes.add("Saturne");
-        planetes.add("Uranus");
-        planetes.add("Neptune");
+
+        for (String pl: data.getNomPlanetes()) {
+            planetes.add(pl);
+        }
     }
 
 
