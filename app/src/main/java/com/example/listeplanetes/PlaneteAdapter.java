@@ -11,22 +11,26 @@ import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 // On instantie l'adaptater
 class PlaneteAdapter extends BaseAdapter {
     private final MainActivity mainActivity;
+    private ArrayList<String> planetes;
 
-    public PlaneteAdapter(MainActivity mainActivity) {
+    public PlaneteAdapter(MainActivity mainActivity, ArrayList<String> planetes) {
         this.mainActivity = mainActivity;
+        this.planetes = planetes;
     }
 
     @Override
     public int getCount() {
-        return mainActivity.planetes.size();
+        return planetes.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mainActivity.planetes.get(position);
+        return planetes.get(position);
     }
 
     @Override
@@ -52,12 +56,12 @@ class PlaneteAdapter extends BaseAdapter {
         final CheckBox checkBox = (CheckBox) itemView.findViewById(R.id.checkbox);
         final Spinner spinner = (Spinner) itemView.findViewById(R.id.spinner);
 
-        // L’objet  nomPlanete va changer le texte de l’element de la liste en le recuperer de la liste des planetes par la position de l’element de la liste
-        nomPlanete.setText(mainActivity.planetes.get(position));
+        // L’objet  nomPlanete va changer le texte de l’element de la liste en le recuperant de la liste des planetes par la position de l’element de la liste
+        nomPlanete.setText(planetes.get(position));
 
         //  installer l'adaptateur pour la liste déroulante (spinner)
-        String[] taillePlanetes = data.getTaillePlanetes();
-        final ArrayAdapter<String> spinadapter = new ArrayAdapter<String>(mainActivity, android.R.layout.simple_spinner_item, taillePlanetes);
+
+        final ArrayAdapter<String> spinadapter = new ArrayAdapter<String>(mainActivity, android.R.layout.simple_spinner_item, data.getPlanetesSize());
         spinadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinadapter);
 
@@ -82,6 +86,8 @@ class PlaneteAdapter extends BaseAdapter {
 
             }
         });
+
+
 
 
         return itemView;
